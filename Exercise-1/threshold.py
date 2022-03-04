@@ -5,14 +5,14 @@ from PIL import Image
 import sys
 
 
-if (len(sys.argv) != 4):
+if (len(sys.argv) != 5):
     print("Please insert the correct arguments!!")
-    print("Usage: python3 <Input Image> <Output Image> <Threshold>")
+    print("Usage: python3 threshold.py <Input Image> <Output Image> <Threshold>")
     sys.exit()
 
 
 # Please insert the desired Picture
-I = np.array(Image.open(sys.argv[1])) # First parameter from the terminal
+I = np.array(Image.open(sys.argv[2])) # First parameter from the terminal
 H = I.shape[0]
 W = I.shape[1]
 
@@ -29,10 +29,10 @@ else:
     for i in range(0, H):
         for j in range(0, W):
             A[i][j] = I[i][j]
-image = Image.open(sys.argv[1], 'r')
+image = Image.open(sys.argv[2], 'r')
 # Copy the original Image to a new one
 Im2 = np.copy(image)
-k = sys.argv[3]
+k = sys.argv[4]
 #Function which has as input an Image and a threshold
 # and as an output a procced one
 def Thresholding(th, Image):
@@ -54,4 +54,4 @@ plt2.figure(2)
 plt2.imshow(Im2, cmap="gray")
 plt2.show()
 # Stores the image with the name of the second parameter of the terminal
-Image.fromarray(Im2.astype(np.uint8)).save(sys.argv[2])
+Image.fromarray(Im2.astype(np.uint8)).save(sys.argv[3])
