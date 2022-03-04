@@ -11,15 +11,16 @@ from PIL import Image
 
 '''
 # It checks for the right parameters
-if len(sys.argv) != 4:
+if len(sys.argv) != 5:
     print("Please insert the correct number of parameters!!")
+    print("Usage: python3 adaptive.py <Input_Image> <Output_Image> <window_size>")
     sys.exit(1)
 
 # Please insert the desired Picture
-I = np.array(Image.open(sys.argv[1])) # First parameter from the terminal
+I = np.array(Image.open(sys.argv[2])) # Second parameter from the terminal
 H = I.shape[0]
 W = I.shape[1]
-window_size = int(sys.argv[3]) # Third parameter from the terminal
+window_size = int(sys.argv[4]) # Fourth parameter from the terminal
 print("The spartial resolution of the image is: ", H, "x", W)
 # If the input image is coloured
 # then we use the mean value to convert into grayscale
@@ -33,7 +34,7 @@ else:
     for i in range(0, H):
         for j in range(0, W):
             A[i][j] = I[i][j]
-image = Image.open(sys.argv[1], 'r')
+image = Image.open(sys.argv[2], 'r')
 
 # This function thresholds a picture with the best threshold and uses the Otsu Algorithm
 def AdaptiveOtsuThresholder(Image):
@@ -103,4 +104,4 @@ plt.subplot(1, 2, 2)
 plt.imshow(I_otsu, cmap='gray')
 plt.show()
 # Stores the image with the name of the second parameter of the terminal
-Image.fromarray(I_otsu.astype(np.uint8)).save(sys.argv[2])
+Image.fromarray(I_otsu.astype(np.uint8)).save(sys.argv[3])
