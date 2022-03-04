@@ -29,7 +29,7 @@ def affTransform(im, a1, a2, a3, a4, a5, a6):
 
 if (len(sys.argv) != 10):
     print("Please insert the correct arguments!!")
-    print("Usage: python3 Affine_Trnasformations.py <Input_Image> <Output_Image> <a1> <a2> <a3> <a4> <a5> <a6>")
+    print("Usage: python3 Affine_Transformations.py <Input_Image> <Output_Image> <a1> <a2> <a3> <a4> <a5> <a6>")
     sys.exit()
 
 # Open image as an array
