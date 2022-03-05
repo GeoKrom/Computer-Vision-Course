@@ -222,9 +222,9 @@ seg_im = np.array(segment_im)
 N = seg_im.shape[0]*seg_im.shape[1]
 C = seg_im.shape[-1]
 X1 = np.reshape(seg_im, [N, C])
-print('Τα αρχικά δεδομένα μου έχουν μέγεθος: {}'.format(X1.shape))
+print('First the data have shape: {}'.format(X1.shape))
 Xreduced1 = PCA(n_components=3).fit_transform(X1)
-print('Μετά το PCA έχουμε μέγεθος: {}'.format(Xreduced1.shape))
+print('After PCA data have shape: {}'.format(Xreduced1.shape))
 seg_im_reduced = np.reshape(Xreduced1, [seg_im.shape[0], seg_im.shape[1], 3])
 print(seg_im_reduced.shape)
 plt.imshow(seg_im_reduced)
@@ -237,9 +237,9 @@ seg_im = np.array(segment_im, dtype = np.uint8)
 N = seg_im.shape[0]*seg_im.shape[1]
 C = seg_im.shape[-1]
 X2 = np.reshape(seg_im, [N, C])
-print('Τα αρχικά δεδομένα μου έχουν μέγεθος: {}'.format(X2.shape))
+print('First the data have shape: {}'.format(X2.shape))
 Xreduced2 = PCA(n_components=8).fit_transform(X2)
-print('Μετά το PCA έχουμε μέγεθος: {}'.format(Xreduced2.shape))
+print('After PCA data have shape: {}'.format(Xreduced2.shape))
 seg_im_reduced2 = np.reshape(Xreduced2, [seg_im.shape[0], seg_im.shape[1], 8])
 
 
@@ -250,20 +250,20 @@ Im = np.mean(Seg_im, axis = -1)
 X = Im.flatten()
 K = 2 # Number of clusters
 N = len(X)  # Number of pixels
-iterations = 30 # Μέγιστος αριθμός επαναλήψεων του αλγόριθμου
+iterations = 30 # Max iteration number of the algorithm
 # New centroids 
 centroids = np.random.rand(K) * 255
-# Εκτύπωση αρχικών κέντρων
+# Print first centroids
 for k in range(K):
-    print('Αρχική τιμή για κέντρο {}: {}'.format(k, centroids[k]))
+    print('First Value for Centroid {}: {}'.format(k, centroids[k]))
     for i in range(iterations):
-      print('Επανάληψη αρ.{}'.format(i+1))
+      print('Iteration number - {}'.format(i+1))
       distances_from_centroids = np.zeros([K, N])
       for k in range(K):
         distances_from_centroids[k,:] = (X - centroids[k]*np.ones(N,))**2
-        # Αυτό το διάνυσμα θα κρατάει τον αριθμό του κοντινότερου κέντρου για το κάθε σημείο
+      # This vector will store the number of the nearest centroid for every point
       nearest_centroids = np.argmin(distances_from_centroids, axis=0)
-      # Βήμα υπολογισμού νέων κέντρων
+      # Compute new centroids
       for k in range(K):
           value_seg = X[nearest_centroids == k]
           if(len(value_seg) == 0):
