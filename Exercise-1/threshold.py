@@ -32,7 +32,7 @@ else:
 image = Image.open(sys.argv[2], 'r')
 # Copy the original Image to a new one
 Im2 = np.copy(image)
-k = sys.argv[4]
+k = int(sys.argv[4])
 #Function which has as input an Image and a threshold
 # and as an output a procced one
 def Thresholding(th, Image):
