@@ -26,13 +26,13 @@ def affTransform(im, a1, a2, a3, a4, a5, a6):
                 newIm[i][j] = im[new_x][new_y]
     return newIm
 
-if (len(sys.argv) != 10):
+if (len(sys.argv) != 9):
     print("Please insert the correct arguments!!")
     print("Usage: python3 Affine_Transformations.py <Input_Image> <Output_Image> <a1> <a2> <a3> <a4> <a5> <a6>")
     sys.exit()
 
 # Open image as an array
-image = Image.open(sys.argv[2], 'r')
+image = Image.open(sys.argv[1], 'r')
 
 #Plotting image
 plt.imshow(image, cmap="gray")
@@ -55,7 +55,7 @@ plt.show()
     Transformed_Image = Taffine @ Image
 '''
 # Transformation
-TfIm = affTransform(image, float(sys.argv[4]), float(sys.argv[5]), float(sys.argv[6]), float(sys.argv[7]), float(sys.argv[8]), float(sys.argv[9]))
+TfIm = affTransform(image, float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]), float(sys.argv[6]), float(sys.argv[7]), float(sys.argv[8]))
 
 #Plotting image
 plt.imshow(TfIm, cmap="gray")
@@ -63,4 +63,4 @@ plt.title("Image after Transformation")
 plt.show()
 
 # Stores the image with the name of the second parameter of the terminal
-Image.fromarray(TfIm.astype(np.uint8)).save(sys.argv[3])
+Image.fromarray(TfIm.astype(np.uint8)).save(sys.argv[2])
