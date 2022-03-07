@@ -33,7 +33,7 @@ if (len(sys.argv) != 9):
 
 # Open image as an array
 image = Image.open(sys.argv[1], 'r')
-
+im_array = np.asarray(image)
 #Plotting image
 plt.imshow(image, cmap="gray")
 plt.title("Image before Transformation")
@@ -55,10 +55,10 @@ plt.show()
     Transformed_Image = Taffine @ Image
 '''
 # Transformation
-TfIm = affTransform(image, float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]), float(sys.argv[6]), float(sys.argv[7]), float(sys.argv[8]))
-
+TfIm = affTransform(im_array, float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]), float(sys.argv[6]), float(sys.argv[7]), float(sys.argv[8]))
+TfIm_pil = Image.fromarray(TfIm)
 #Plotting image
-plt.imshow(TfIm, cmap="gray")
+plt.imshow(TfIm_pil, cmap="gray")
 plt.title("Image after Transformation")
 plt.show()
 
