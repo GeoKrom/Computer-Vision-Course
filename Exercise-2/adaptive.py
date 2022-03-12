@@ -1,3 +1,4 @@
+# Krommydas Georgios, A.M.: 3260
 import sys
 import numpy as np
 from numpy import *
@@ -17,15 +18,15 @@ if len(sys.argv) != 4:
     sys.exit(1)
 
 # Please insert the desired Picture
-I = np.array(Image.open(sys.argv[1])) # Second parameter from the terminal
+I = np.array(Image.open(sys.argv[1])) # First parameter from the terminal
 H = I.shape[0]
 W = I.shape[1]
-window_size = int(sys.argv[3]) # Fourth parameter from the terminal
+window_size = int(sys.argv[3]) # Third parameter from the terminal
 print("The spartial resolution of the image is: ", H, "x", W)
 # If the input image is coloured
 # then we use the mean value to convert into grayscale
 A = np.zeros([H,W])
-I = double(I)
+I = np.double(I)
 if len(I.shape) == 3:
     for i in range (0, H):
         for j in range(0, W):
@@ -34,33 +35,33 @@ else:
     for i in range(0, H):
         for j in range(0, W):
             A[i][j] = I[i][j]
-image = Image.open(sys.argv[1], 'r')
+image = np.array(Image.open(sys.argv[1], 'r'))
 
 # This function thresholds a picture with the best threshold and uses the Otsu Algorithm
-def AdaptiveOtsuThresholder(Image):
-    prob1 = np.zeros(Image)
-    prob2 = np.zeros(Image)
-    pixel = np.zeros(Image)
-    ni = np.zeros(Image)
-    pi = np.zeros(Image)
+def AdaptiveOtsuThresholder(procImage):
+    prob1 = np.zeros(procImage.shape)
+    prob2 = np.zeros(procImage.shape)
+    pixel = np.zeros(procImage.shape)
+    ni = np.zeros(procImage.shape)
+    pi = np.zeros(procImage.shape)
     total_meanval = 0
-    objFunc = np.zeros(Image)
+    objFunc = np.zeros(procImage.shape)
     thresholds = list()
     best_threshold = 0
     for i in range(0, H, window_size):
         for j in range(0, W, window_size):
-            ni = np.zeros(Image)
-            pi = np.zeros(Image)
+            ni = np.zeros(procImage.shape)
+            pi = np.zeros(procImage.shape)
             best_threshold = 0
-            prob1 = np.zeros(Image)
-            prob2 = np.zeros(Image)
-            meanval1 = np.zeros(Image)
-            meanval2 = np.zeros(Image)
+            prob1 = np.zeros(procImage.shape)
+            prob2 = np.zeros(procImage.shape)
+            meanval1 = np.zeros(procImage.shape)
+            meanval2 = np.zeros(procImage.shape)
             max_value = 0
             regionHeigth = 0
             regionWidth = 0
             for regH in range(i, i + window_size):
-                if k > H:
+                if regH > H:
                     break
                 for regW in range (j, j + window_size):
                     if regW > W:
@@ -87,13 +88,13 @@ def AdaptiveOtsuThresholder(Image):
     counter = 0
     for i in range(0, H, window_size):
         for j in range(i, W, window_size):
-            for k in range(i,i + window_size):
-                for z in range(j,j + window_size):
-                    if Image[k][z]  < thresholds[counter]:
-                        Image[k][z] = 0
+            for k in range(i, i + window_size):
+                for z in range(j, j + window_size):
+                    if procImage[k][z]  < thresholds[counter]:
+                        procImage[k][z] = 0
                     else:
-                        Image[k][z] = 255
-            counter+=1
+                        procImage[k][z] = 255
+            counter += 1
     print(thresholds)
 
 I_otsu = AdaptiveOtsuThresholder(image)
