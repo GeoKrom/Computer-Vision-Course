@@ -7,7 +7,7 @@ import sys
 
 if (len(sys.argv) != 4):
     print("Please insert the correct arguments!!")
-    print("Usage: python3 threshold.py <Input Image> <Output Image> <Threshold>")
+    print("Usage: python3 <Input Image> <Output Image> <Threshold>")
     sys.exit()
 
 
@@ -20,7 +20,7 @@ print("The spartial resolution of the image is: ", H, "x", W)
 # If the input image is coloured
 # then we use the mean value to convert into grayscale
 A = np.zeros([H,W])
-I = double(I)
+I = np.double(I)
 if len(I.shape) == 3:
     for i in range (0, H):
         for j in range(0, W):
